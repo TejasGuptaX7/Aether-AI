@@ -1,101 +1,142 @@
-import Image from "next/image";
+'use client';
+
+import { useRouter } from "next/navigation";
+import { SignInButton, SignedOut, SignedIn, UserButton } from "@clerk/nextjs";
+import Link from "next/link";
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const router = useRouter();
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  const handleGetStarted = () => {
+    router.push("/dashboard");
+  };
+
+  const productPoints = [
+    "Powerful AI-driven writing assistance",
+    "Seamless content generation and editing",
+    "Advanced language understanding",
+    "Customizable writing styles",
+    "Real-time collaboration features",
+    "Secure and private writing environment",
+  ];
+
+  return (
+    <div className="relative min-h-screen bg-gradient-to-b from-gray-900 via-gray-800 to-gray-700 text-white overflow-hidden">
+      {/* Stars Background */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="tiny-stars"></div>
+      </div>
+
+      {/* Navigation Bar */}
+      <nav className="flex justify-between items-center py-4 px-6 bg-gradient-to-r from-gray-800 to-gray-900 text-white shadow-md relative z-10">
+        {/* Left Icon */}
+        <div className="flex items-center space-x-3">
+          <span className="bg-gray-700 rounded-full p-2">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth="1.5"
+              stroke="currentColor"
+              className="w-6 h-6"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M12 8.25v7.5m0 0H9m3 0h3M12 3c4.97 0 9 4.03 9 9 0 4.97-4.03 9-9 9s-9-4.03-9-9c0-4.97 4.03-9 9-9z"
+              />
+            </svg>
+          </span>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+
+        {/* Center Links */}
+        <div className="flex items-center space-x-8">
+          <Link
+            href="/"
+            className="text-lg font-medium hover:text-gray-300 transition-colors"
+          >
+            Home
+          </Link>
+          <Link
+            href="/use-cases"
+            className="text-lg font-medium hover:text-gray-300 transition-colors"
+          >
+            Use Cases
+          </Link>
+          <Link
+            href="/features"
+            className="text-lg font-medium hover:text-gray-300 transition-colors"
+          >
+            Features
+          </Link>
+          <Link
+            href="/team"
+            className="text-lg font-medium hover:text-gray-300 transition-colors"
+          >
+            Team
+          </Link>
+        </div>
+
+        {/* Right: Profile/Sign In */}
+        <div className="flex items-center space-x-3">
+          <SignedOut>
+            <SignInButton mode="modal">
+              <button className="flex items-center bg-gray-700 px-4 py-2 rounded-full text-lg font-medium hover:bg-gray-600 transition-colors">
+                Sign In
+              </button>
+            </SignInButton>
+          </SignedOut>
+          <SignedIn>
+            <UserButton
+              appearance={{
+                elements: {
+                  rootBox: "bg-gray-700 text-white p-1 rounded-full hover:bg-gray-600",
+                },
+              }}
+            />
+            <span className="text-lg font-medium">Dashboard</span>
+          </SignedIn>
+        </div>
+      </nav>
+
+      {/* Hero Section */}
+      <section className="text-center mt-20 relative z-10">
+        <SignedOut>
+          <SignInButton mode="modal">
+            <button className="bg-green-600 text-white px-6 py-3 rounded-full mb-6 hover:bg-green-700 transition-colors">
+              Get Started
+            </button>
+          </SignInButton>
+        </SignedOut>
+
+        <SignedIn>
+          <button
+            onClick={handleGetStarted}
+            className="bg-green-600 text-white px-6 py-3 rounded-full mb-6 hover:bg-green-700 transition-colors"
+          >
+            Get Started
+          </button>
+        </SignedIn>
+
+        <h1 className="text-5xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500">
+          The Ultimate Writing Experience
+        </h1>
+        <p className="text-xl text-gray-300 mb-16">
+          Let AI do the heavy lifting while you focus on creativity
+        </p>
+      </section>
+
+      {/* Product Points Section */}
+      <section className="max-w-6xl mx-auto grid grid-cols-2 gap-8 p-6 relative z-10">
+        {productPoints.map((point, index) => (
+          <div
+            key={index}
+            className="bg-gray-800 p-6 rounded-lg shadow-md hover:shadow-xl transition-all transform hover:-translate-y-2"
+          >
+            <p className="text-gray-200 text-lg">{point}</p>
+          </div>
+        ))}
+      </section>
     </div>
   );
 }
